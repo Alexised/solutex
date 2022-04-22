@@ -14,13 +14,13 @@ body {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/lmFJOx7hPc4/600x800");
+  background: url("https://source.unsplash.com/hzdgFPz1V24/400x300");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/lvWw_G8tKsk/600x800"); 
+  background: url("https://source.unsplash.com/nWAlCB1tyvc/400x300"); 
   background-position: center;
   background-size: cover;
 }

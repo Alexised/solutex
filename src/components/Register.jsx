@@ -50,13 +50,25 @@ const Register = ({ handleSumbit }) => {
   return (
     <form className="user" onSubmit={sendForm}>
       <div className="form-group row">
-        <div className="col-sm-12 mb-3 mb-sm-0">
+      <div className="col-sm-6 mb-3 mb-sm-0">
           <input
             type="text"
             className="form-control form-control-user"
-            id="user"
-            placeholder="User"
-            name="user"
+            id="name"
+            placeholder="Nombre de usuario"
+            name="Name"
+            onChange={handleInputChange}
+            required
+          />
+
+        </div>
+        <div className="col-sm-6">
+          <input
+            type="text"
+            className="form-control form-control-user"
+            id="lastName"
+            placeholder="Apellido"
+            name="lastName"
             onChange={handleInputChange}
             required
           />
@@ -69,6 +81,17 @@ const Register = ({ handleSumbit }) => {
           id="email"
           placeholder="Email"
           name="email"
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="phone"
+          className="form-control form-control-user"
+          id="phone"
+          placeholder="Telefono"
+          name="phone"
           onChange={handleInputChange}
           required
         />
@@ -98,7 +121,7 @@ const Register = ({ handleSumbit }) => {
         </div>
       </div>
       <button type="submit" className="btn btn-primary btn-user btn-block">
-        Register Account
+        Registrarse
       </button>
     </form>
   );

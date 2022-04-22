@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import jwtDecode from "jwt-decode";
-import config from "../config";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import config from '../config';
 import { blue } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
-import { makeStyles } from "@mui/styles";
-import PersonIcon from "@mui/icons-material/Person";
+import { makeStyles } from '@mui/styles';
+import PersonIcon from '@mui/icons-material/Person';
 
 const TOKEN_KEY = "SOLD_TOKEN";
 const API = `${config.api_url}/users`;
@@ -32,6 +32,7 @@ const Header = (props) => {
     home: "nav-item",
     createproduct: "nav-item",
     register: "nav-item",
+    createLot: "nav-item",
     login: "nav-item",
     my_products:"nav-item",
   });
@@ -47,16 +48,23 @@ const Header = (props) => {
         data.home = "nav-item active";
         data.register = "nav-item";
         data.login = "nav-item";
+        data.createLot = "nav-item";
         break;
+        case "/createLot":
+          data.home = "nav-item";
+          data.register = "nav-item";
+          data.login = "nav-item";
+          data.createLot = "nav-item active";
+          break;
       case "/register":
         data.home = "nav-item";
         data.register = "nav-item active";
-        data.login = "nav-item";
+        data.createLot = "nav-item";
         break;
       case "/login":
         data.home = "nav-item";
         data.register = "nav-item";
-        data.login = "nav-item active";
+        data.createLot = "nav-item";
         break;
       default:
     }
@@ -74,20 +82,19 @@ const Header = (props) => {
       if (user && user.name) {
         setUser(user);
         localStorage.setItem("id", id);
-        // console.log(user.name);
+
       }
 
-      // console.log(result)
+
     } catch (error) {
       console.error("Error :(", error);
     }
   };
 
   useEffect(() => {
-    // console.log(jwtDecode(localStorage.getItem(TOKEN_KEY)))
+
     getactive();
     async function loaduser() {
-      // console.log(getToken())
 
       if (!getToken()) {
         setLoaduser(false);
@@ -95,8 +102,6 @@ const Header = (props) => {
       }
       try {
         let decoded = jwtDecode(localStorage.getItem(TOKEN_KEY));
-        // console.log(decoded._id);
-        // setId(decoded._id);
         setLoaduser(true);
         getuser(decoded._id);
       } catch (error) {
@@ -159,7 +164,11 @@ const Header = (props) => {
                       Register
                     </Link>
                   </li>
-
+                  <li className={styleactive.createLot}>
+                    <Link className="nav-link" to="/createLot">
+                      Crear lote
+                    </Link>
+                  </li>
                   <li className={styleactive.login}>
                     <Link className="nav-link" to="/login">
                       Login

@@ -127,13 +127,13 @@ return (
                         type="submit"
                         className="btn btn-primary btn-user btn-block"
                       >
-                        Login
+                        Ingresar
                       </button>
                     </form>
                     <hr />
                     <div className="text-center">
                       <Link className="small" to="/register">
-                        Create an Account!
+                        Crear Cuenta!
                       </Link>
                     </div>
                   </div>

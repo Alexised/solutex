@@ -99,16 +99,6 @@ const CreateLot = ({
           />
         </div>
       </div>
-      <label htmlFor="icon-button-file">
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="span"
-        >
-          <PhotoCamera />
-        </IconButton>
-      </label>
-
       <button type="submit" className="btn btn-primary btn-user btn-block">
         Registrar Lote
       </button>

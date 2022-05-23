@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-import config from '../config';
-import { blue } from '@mui/material/colors';
-import Avatar from '@mui/material/Avatar';
-import { makeStyles } from '@mui/styles';
-import PersonIcon from '@mui/icons-material/Person';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import config from "../config";
+import { blue } from "@mui/material/colors";
+import Avatar from "@mui/material/Avatar";
+import { makeStyles } from "@mui/styles";
+import PersonIcon from "@mui/icons-material/Person";
 
 const TOKEN_KEY = "SOLUTEX_TOKEN";
 const API = `${config.api_url}users`;
@@ -34,7 +34,7 @@ const Header = (props) => {
     register: "nav-item",
     createLot: "nav-item",
     login: "nav-item",
-    my_products:"nav-item",
+    my_products: "nav-item",
   });
   const [user, setUser] = useState([]);
   const [loaduser, setLoaduser] = useState(null);
@@ -49,22 +49,35 @@ const Header = (props) => {
         data.register = "nav-item";
         data.login = "nav-item";
         data.createLot = "nav-item";
+        data.createOperation = "nav-item";
         break;
-        case "/createLot":
-          data.home = "nav-item";
-          data.register = "nav-item";
-          data.login = "nav-item";
-          data.createLot = "nav-item active";
-          break;
+      case "/createLot":
+        data.home = "nav-item";
+        data.register = "nav-item";
+        data.login = "nav-item";
+        data.createLot = "nav-item active";
+        data.createOperation = "nav-item";
+        break;
+      case "/createOperation":
+        data.home = "nav-item";
+        data.register = "nav-item";
+        data.login = "nav-item";
+        data.createOperation = "nav-item active";
+        data.createLot = "nav-item";
+        break;
       case "/register":
         data.home = "nav-item";
         data.register = "nav-item active";
         data.createLot = "nav-item";
+        data.createOperation = "nav-item";
+        data.login = "nav-item";
         break;
       case "/login":
+        data.login = "nav-item active";
         data.home = "nav-item";
         data.register = "nav-item";
         data.createLot = "nav-item";
+        data.createOperation = "nav-item";
         break;
       default:
     }
@@ -80,20 +93,15 @@ const Header = (props) => {
       const result = await fetch(`${API}/${id}`, payload);
       const user = await result.json();
       if (user && user?.result?.NAME) {
-
         setUser(user.result);
         localStorage.setItem("id", id);
-
       }
-
-
     } catch (error) {
       console.error("Error :(", error);
     }
   };
 
   useEffect(() => {
-
     getactive();
     async function loaduser() {
       if (!getToken()) {
@@ -144,12 +152,17 @@ const Header = (props) => {
                     <Link className="nav-link" to="/">
                       {user.NAME}
                     </Link>
-                  </li>  
+                  </li>
                   <li className={styleactive.createLot}>
                     <Link className="nav-link" to="/createLot">
                       Crear lote
                     </Link>
-                  </li>       
+                  </li>
+                  <li className={styleactive.createOperation}>
+                    <Link className="nav-link" to="/createOperation">
+                      Crear operacion
+                    </Link>
+                  </li>
                   <li class="no-bullet">
                     <Link className="nav-link" to="/home" onClick={deleteToken}>
                       Salir

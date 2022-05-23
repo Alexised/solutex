@@ -5,9 +5,29 @@ import FormLot from "../components/CreateLot";
 import Swal from "sweetalert2";
 import config from "../config";
 
-const API = `${config.api_url}/createlot`;
+const API = `${config.api_url}/`;
 
+
+const getOperations = async(setOperation) => {
+  try {;
+    const result = await fetch(`${config.api_url}operation`)
+    const select = await result.json();
+    if(select.result){
+    setOperation(select.result);
+    } 
+  } catch (error) {
+    console.error('Error :(', error);
+  }
+};
 const CreateLot = (props) => {
+  const [operation, setOperation] = useState({});
+  useEffect(() => {
+    if(localStorage.getItem("SOLUTEX_TOKEN")==null){
+      window.location.href =window.location.origin;
+    }
+    getOperations(setOperation)
+  
+  }, []);
   return (
     <>
       <Header />
@@ -23,7 +43,7 @@ const CreateLot = (props) => {
                   <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Crear lote</h1>
                   </div>
-                  <FormLot product={props} />
+                  <FormLot operation={operation} />
                   <hr />
                 </div>
               </div>

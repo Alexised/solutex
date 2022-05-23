@@ -4,11 +4,27 @@ import Swal from "sweetalert2";
 import { DataGrid } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
 
-const VISIBLE_FIELDS = ['name', 'isAdmin'];
+const formatData = (data,setData) => {
+let operation=[]
+data.map((item) => {
+  let aux = {
+    id:item.ID_OPERATION,
+    OPERATION_NAME: item.OPERATION_NAME,
+    OPERATION_COST: item.OPERATION_COST,
+  }
+  operation.push(aux)
+})
+debugger
+setData(operation)
+}
+
 const CreateLot = ({
-  handleSumbit,
-  product,
+  operation,
 }) => {
+  const [data, setData] = useState([
+    
+  ])
+  
   const [form, setForm] = useState([
     {
       name: "",
@@ -18,20 +34,27 @@ const CreateLot = ({
       user: localStorage.getItem("id"),
     },
   ]);
-  const { data } = useDemoData({
-    dataSet: 'Employee',
-    visibleFields: VISIBLE_FIELDS,
-    rowLength: 100,
-  });
 
+  const column = [
+    { field: 'id', headerName: 'id', width: 60 },
+    { field: 'OPERATION_NAME', headerName: 'Nombre', width: 120 },
+    { field: 'OPERATION_COST', headerName: 'Costo', width: 120 },
+
+  ]
   const columns = React.useMemo(
     () =>
-      data.columns.map((col) =>
-        col.field === 'rating' ? { ...col, filterable: false } : col,
+    column.map((col) =>
+        col.field === "rating" ? { ...col, filterable: false } : col
       ),
-    [data.columns],
+    [column]
   );
 
+  useEffect(() => {
+    if(operation.length > 0) {
+    formatData(operation,setData)
+    }
+
+  }, [operation]);
   const handleInputChange = (evt) => {
     const data = [...form];
     const {
@@ -114,7 +137,7 @@ const CreateLot = ({
           />
         </div>
         <div style={{ height: 400, width: '100%' }}>
-      <DataGrid {...data} columns={columns} />
+      <DataGrid checkboxSelection rows={data} columns={columns} />
     </div>
       </div>
       <button type="submit" className="btn btn-primary btn-user btn-block">

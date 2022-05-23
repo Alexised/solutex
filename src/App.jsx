@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import CreateLot from "./pages/CreateLot";
 import Recovery from "./pages/RecoveryPassword";
 import Change from "./pages/ChangePassword";
+import createOperation from "./pages/CreateOperation";
 
 
 import "./App.css";
@@ -18,6 +19,7 @@ const Routes = () => (
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
       <Route path="/createLot" exact component={CreateLot} />
+      <Route path="/createOperation" exact component={createOperation} />
       <Route path="/recovery" exact component={Recovery} />
       <Route path="/change" exact component={Change} />
     </Switch>

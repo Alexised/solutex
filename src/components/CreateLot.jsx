@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
+import { DataGrid } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
+
+const VISIBLE_FIELDS = ['name', 'isAdmin'];
 const CreateLot = ({
   handleSumbit,
   product,
@@ -16,6 +18,19 @@ const CreateLot = ({
       user: localStorage.getItem("id"),
     },
   ]);
+  const { data } = useDemoData({
+    dataSet: 'Employee',
+    visibleFields: VISIBLE_FIELDS,
+    rowLength: 100,
+  });
+
+  const columns = React.useMemo(
+    () =>
+      data.columns.map((col) =>
+        col.field === 'rating' ? { ...col, filterable: false } : col,
+      ),
+    [data.columns],
+  );
 
   const handleInputChange = (evt) => {
     const data = [...form];
@@ -98,6 +113,9 @@ const CreateLot = ({
             required
           />
         </div>
+        <div style={{ height: 400, width: '100%' }}>
+      <DataGrid {...data} columns={columns} />
+    </div>
       </div>
       <button type="submit" className="btn btn-primary btn-user btn-block">
         Registrar Lote

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 const Register = ({ handleSumbit }) => {
   const [form, setForm] = useState({
-    user: "",
+    id: "",
     email: "",
     password: "",
     role: "user",
@@ -13,8 +13,8 @@ const Register = ({ handleSumbit }) => {
     const data = form
     const { target: { name, value } } = evt;
     switch (name) {
-      case "user":
-        data.user = value;
+      case "name":
+        data.username = value;
         break
       case "email":
         data.email = value;
@@ -25,6 +25,15 @@ const Register = ({ handleSumbit }) => {
       case "confirmPassword":
           data.confirmPassword = value;
           break
+      case "phone":
+          data.phone = value;
+          break
+      case "lastName":
+            data.last_name = value;
+            break
+      case "cc":
+            data.id = value;
+            break
       default:
 
     }
@@ -56,7 +65,7 @@ const Register = ({ handleSumbit }) => {
             className="form-control form-control-user"
             id="name"
             placeholder="Nombre de usuario"
-            name="Name"
+            name="name"
             onChange={handleInputChange}
             required
           />
@@ -70,7 +79,6 @@ const Register = ({ handleSumbit }) => {
             placeholder="Apellido"
             name="lastName"
             onChange={handleInputChange}
-            required
           />
         </div>
       </div>
@@ -85,16 +93,28 @@ const Register = ({ handleSumbit }) => {
           required
         />
       </div>
-      <div className="form-group">
+      <div className="form-group row">
+      <div className="col-sm-6 mb-3 mb-sm-0">
         <input
-          type="phone"
+          type="number"
           className="form-control form-control-user"
           id="phone"
           placeholder="Telefono"
           name="phone"
           onChange={handleInputChange}
+        />
+        </div>
+        <div className="col-sm-6 mb-3 mb-sm-0">
+        <input
+          type="number"
+          className="form-control form-control-user"
+          id="cc"
+          placeholder="Cedula"
+          name="cc"
+          onChange={handleInputChange}
           required
         />
+        </div>
       </div>
       <div className="form-group row">
         <div className="col-sm-6 mb-3 mb-sm-0">

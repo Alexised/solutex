@@ -7,8 +7,8 @@ import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles';
 import PersonIcon from '@mui/icons-material/Person';
 
-const TOKEN_KEY = "SOLD_TOKEN";
-const API = `${config.api_url}/users`;
+const TOKEN_KEY = "SOLUTEX_TOKEN";
+const API = `${config.api_url}users`;
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
@@ -79,8 +79,9 @@ const Header = (props) => {
     try {
       const result = await fetch(`${API}/${id}`, payload);
       const user = await result.json();
-      if (user && user.name) {
-        setUser(user);
+      if (user && user?.result?.NAME) {
+
+        setUser(user.result);
         localStorage.setItem("id", id);
 
       }
@@ -95,7 +96,6 @@ const Header = (props) => {
 
     getactive();
     async function loaduser() {
-
       if (!getToken()) {
         setLoaduser(false);
         return;
@@ -103,7 +103,8 @@ const Header = (props) => {
       try {
         let decoded = jwtDecode(localStorage.getItem(TOKEN_KEY));
         setLoaduser(true);
-        getuser(decoded._id);
+
+        getuser(decoded.id);
       } catch (error) {
         console.log(error);
       }
@@ -141,9 +142,14 @@ const Header = (props) => {
                   </li>
                   <li className="nav-item active">
                     <Link className="nav-link" to="/">
-                      {user.name}
+                      {user.NAME}
                     </Link>
-                  </li>         
+                  </li>  
+                  <li className={styleactive.createLot}>
+                    <Link className="nav-link" to="/createLot">
+                      Crear lote
+                    </Link>
+                  </li>       
                   <li class="no-bullet">
                     <Link className="nav-link" to="/home" onClick={deleteToken}>
                       Salir
@@ -162,11 +168,6 @@ const Header = (props) => {
                   <li className={styleactive.register}>
                     <Link className="nav-link" to="/register">
                       Register
-                    </Link>
-                  </li>
-                  <li className={styleactive.createLot}>
-                    <Link className="nav-link" to="/createLot">
-                      Crear lote
                     </Link>
                   </li>
                   <li className={styleactive.login}>

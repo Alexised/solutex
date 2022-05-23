@@ -17,7 +17,7 @@ const createUser = async(form) => {
   try {
     const result = await fetch(API, payload)
     const user = await result.json();
-    if (user && user.result.id) {
+    if (user && user?.result?.ID_USERS) {
       localStorage.setItem('userEco', JSON.stringify(user.result.id))
       Swal.fire({
         icon: 'success',
@@ -29,7 +29,7 @@ const createUser = async(form) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: "se ah presentado un error al guardar el usuario",
+        text: `se ah presentado un error al guardar el usuario ${user?.status?.description}`,
       })
       // console.error('Error :(', error);
     }
@@ -46,11 +46,7 @@ const createUser = async(form) => {
 }
 
 const Register = () => {
-  useEffect(() => {
-    // if(localStorage.getItem("SOLUTEX_TOKEN")==null){
-    //   window.location.href =window.location.origin;
-    // }
-  }, []);
+
   return(
   <>
   <Header />

@@ -53,7 +53,7 @@ const auth = async(form) => {
         title: 'login',
         text: "Usuario logeado con exito",
       })
-      props.history.push('/home')
+      props.history.push('/')
     }else{ 
       Swal.fire({
         icon: 'error',

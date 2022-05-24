@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 import { DataGrid } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
+
 
 const formatData = (data,setData) => {
 let operation=[]
@@ -14,7 +14,6 @@ data.map((item) => {
   }
   operation.push(aux)
 })
-debugger
 setData(operation)
 }
 

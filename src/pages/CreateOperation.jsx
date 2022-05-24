@@ -17,7 +17,6 @@ const createOperation = async(form) => {
   try {
     const result = await fetch(API, payload)
     const operation = await result.json();
-    debugger
     if (operation?.status?.code === "SUCCESS") {
       Swal.fire({
         icon: 'success',
@@ -65,6 +64,9 @@ const CreateOperation = () => {
               </div>
               <FormCreateOperation handleSumbit={createOperation}/>
               <hr />
+              <div className="text-center">
+                <Link className="small" to="/operation">ver las operaciones que existen </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
- const API= {
-    api_url: "http://localhost:3000/api/",
+const API= {
+    api_url: "https://solutex.herokuapp.com/api/",
 
 }
 
